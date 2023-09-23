@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Chat Apk</string>
+    <string name="developed_by_mohitkumar_soni">developed by: Mohitkumar Soni</string>
 </resources>
