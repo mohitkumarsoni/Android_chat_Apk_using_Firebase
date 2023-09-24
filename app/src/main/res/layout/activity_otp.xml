@@ -9,7 +9,7 @@
     android:weightSum="100"
     android:padding="10dp"
     android:background="@color/grey"
-    tools:context=".LoginPhoneActivity">
+    tools:context=".OTP_Activity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -23,7 +23,7 @@
             android:layout_height="32dp"
             android:layout_margin="10dp"
             android:background="@drawable/round_bg"
-            android:backgroundTint="@color/white">
+            android:backgroundTint="@color/dracula">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -31,7 +31,7 @@
                 android:layout_centerInParent="true"
                 android:textStyle="bold"
                 android:textSize="18sp"
-                android:textColor="@color/black"
+                android:textColor="@color/grey"
                 android:text="@string/_1"/>
 
         </RelativeLayout>
@@ -41,14 +41,14 @@
             android:layout_height="32dp"
             android:layout_margin="10dp"
             android:background="@drawable/round_bg"
-            android:backgroundTint="@color/dracula">
+            android:backgroundTint="@color/white">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:text="@string/_2"
-                android:textColor="@color/grey"
+                android:textColor="@color/black"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -80,13 +80,13 @@
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_weight="15"
-        android:src="@drawable/phone"
-        android:contentDescription="@string/app_name" />
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/otp" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/enter_mobile_number"
+        android:text="@string/enter_otp_sent_to_you"
         android:gravity="center_horizontal"
         android:textSize="12sp"
         android:fontFamily="@font/digital_desolation_alternate"
@@ -103,18 +103,13 @@
         android:orientation="horizontal">
 
 
-        <com.hbb20.CountryCodePicker
-            android:id="@+id/login_countrycode"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="@style/ccp_theme"
-            app:ccp_showFlag="false" />
+
 
         <EditText
-            android:id="@+id/login_mobile_number"
+            android:id="@+id/login_otp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/mobile"
+            android:hint="@string/otp_code"
             android:inputType="phone"
             android:padding="10dp"
             android:textSize="22sp"
@@ -133,7 +128,7 @@
         android:layout_weight="10">
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/send_otp_btn"
+            android:id="@+id/login_next"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/off_white"
@@ -147,12 +142,20 @@
             android:layout_height="25dp"
             android:indeterminateTint="@color/dracula"
             android:layout_alignParentEnd="true"
-            android:layout_below="@+id/send_otp_btn"
+            android:layout_below="@+id/login_next"
             android:layout_margin="10dp"/>
 
-
-
     </RelativeLayout>
+
+    <TextView
+        android:id="@+id/resend_otp_textview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/resend_otp_in_30_sec"
+        android:textAlignment="center"
+        android:textSize="11sp"
+        android:textColor="@color/dracula"
+        android:fontFamily="@font/digital_desolation_alternate"/>
 
 
 </LinearLayout>

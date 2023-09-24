@@ -3,4 +3,11 @@
     <string name="developed_by_mohitkumar_soni">developed by: Mohitkumar Soni</string>
     <string name="enter_mobile_number">Enter mobile number</string>
     <string name="mobile">Mobile</string>
+    <string name="_3">3</string>
+    <string name="_2">2</string>
+    <string name="_1">1</string>
+    <string name="enter_otp_sent_to_you">Enter OTP sent to you</string>
+    <string name="otp_code">OTP code</string>
+    <string name="resend_otp_in_30_sec">Resend OTP in 30 sec</string>
+    <string name="username">Username</string>
 </resources>

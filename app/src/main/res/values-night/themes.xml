@@ -11,4 +11,8 @@
         <item name="colorSecondaryVariant">@color/grey</item>
         <item name="colorOnSecondary">@color/grey</item>
     </style>
+
+    <style name="ccp_theme">
+        <item name="ccpDialog_textColor">@color/white</item>
+    </style>
 </resources>
