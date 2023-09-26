@@ -140,10 +140,13 @@
             android:id="@+id/login_progress_bar"
             android:layout_width="25dp"
             android:layout_height="25dp"
-            android:indeterminateTint="@color/dracula"
-            android:layout_alignParentEnd="true"
             android:layout_below="@+id/login_next"
-            android:layout_margin="10dp"/>
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:indeterminateTint="@color/dracula" />
 
     </RelativeLayout>
 
