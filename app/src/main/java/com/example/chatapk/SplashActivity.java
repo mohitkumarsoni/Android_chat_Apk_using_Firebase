@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 
+import com.example.chatapk.util.FireBaseUtil;
+
 public class SplashActivity extends AppCompatActivity {
 
     @Override
@@ -22,8 +24,13 @@ public class SplashActivity extends AppCompatActivity {
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        Intent intent = new Intent(SplashActivity.this, LoginPhoneActivity.class);
-                        startActivity(intent);
+
+                        if (FireBaseUtil.isLoggedIn()){
+                            startActivity(new Intent(SplashActivity.this, MainActivity.class));
+                        }else {
+                            startActivity(new Intent(SplashActivity.this, LoginPhoneActivity.class));
+                        }
+                        finish();
                     }
                 },1500);
             }

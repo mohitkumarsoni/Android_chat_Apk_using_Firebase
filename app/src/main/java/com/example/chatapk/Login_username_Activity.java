@@ -56,16 +56,13 @@ public class Login_username_Activity extends AppCompatActivity {
             userModel = new UserModel(phoneNumber,username, Timestamp.now());
         }
 
-        FireBaseUtil.currentUserDetails().set(userModel).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                setInProgress(false);
-                if (task.isSuccessful()){
-                    Intent intent = new Intent(Login_username_Activity.this, MainActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    startActivity(intent);
+        FireBaseUtil.currentUserDetails().set(userModel).addOnCompleteListener(task -> {
+            setInProgress(false);
+            if (task.isSuccessful()){
+                Intent intent = new Intent(Login_username_Activity.this, MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
 
-                }
             }
         });
 
