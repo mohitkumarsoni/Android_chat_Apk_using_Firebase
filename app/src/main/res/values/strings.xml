@@ -11,4 +11,6 @@
     <string name="resend_otp_in_30_sec">Resend OTP in 30 sec</string>
     <string name="username">Username</string>
     <string name="hello_mohit">hello mohit</string>
+    <string name="chats">Chats</string>
+    <string name="profile">Profile</string>
 </resources>

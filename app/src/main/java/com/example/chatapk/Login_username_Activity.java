@@ -1,6 +1,5 @@
 package com.example.chatapk;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -11,11 +10,8 @@ import android.widget.ProgressBar;
 
 import com.example.chatapk.model.UserModel;
 import com.example.chatapk.util.FireBaseUtil;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.Timestamp;
-import com.google.firebase.firestore.DocumentSnapshot;
 
 public class Login_username_Activity extends AppCompatActivity {
     EditText usernameInput;
@@ -36,9 +32,7 @@ public class Login_username_Activity extends AppCompatActivity {
         phoneNumber = getIntent().getStringExtra("phone");
         getUsername();
         
-        letMeInBtn.setOnClickListener(v -> {
-            setUsername();
-        });
+        letMeInBtn.setOnClickListener(v -> setUsername());
         
     }
 
@@ -68,18 +62,14 @@ public class Login_username_Activity extends AppCompatActivity {
 
     }
 
-
     private void getUsername() {
         setInProgress(true);
-        FireBaseUtil.currentUserDetails().get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                setInProgress(false);
-                if (task.isSuccessful()){
-                    userModel = task.getResult().toObject(UserModel.class);
-                    if (userModel != null){
-                        usernameInput.setText(userModel.getUsername());
-                    }
+        FireBaseUtil.currentUserDetails().get().addOnCompleteListener(task -> {
+            setInProgress(false);
+            if (task.isSuccessful()){
+                userModel = task.getResult().toObject(UserModel.class);
+                if (userModel != null){
+                    usernameInput.setText(userModel.getUsername());
                 }
             }
         });
@@ -95,3 +85,12 @@ public class Login_username_Activity extends AppCompatActivity {
         }
     }
 }
+
+
+
+
+
+
+
+
+
