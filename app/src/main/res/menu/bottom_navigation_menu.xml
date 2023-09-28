@@ -9,6 +9,6 @@
     <item
         android:title="@string/profile"
         android:icon="@drawable/person_icon"
-        android:id="@+id/menu_person"/>
+        android:id="@+id/menu_profile"/>
 
 </menu>

@@ -26,6 +26,7 @@
             android:layout_centerVertical="true"/>
 
         <ImageButton
+            android:id="@+id/main_search_button"
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:src="@drawable/icon_search"
@@ -37,6 +38,7 @@
     </RelativeLayout>
 
     <FrameLayout
+        android:id="@+id/main_frame_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/main_toolbar"
