@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.chatapk.R;
 import com.example.chatapk.model.UserModel;
+import com.example.chatapk.util.FireBaseUtil;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 
@@ -29,6 +30,16 @@ public class Search_User_Recycler_Adapter extends FirestoreRecyclerAdapter<UserM
     protected void onBindViewHolder(@NonNull UserModelViewHolder holder, int position, @NonNull UserModel model) {
         holder.usernameText.setText(model.getUsername());
         holder.phoneText.setText(model.getPhone());
+
+        if (model.getUserId().equals(FireBaseUtil.currentUserId())){
+            holder.usernameText.setText(model.getUsername()+" (Me)");
+        }
+
+        holder.itemView.setOnClickListener(v -> {
+            // navigate to chat activity
+
+        });
+
     }
 
     @NonNull

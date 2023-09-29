@@ -66,7 +66,7 @@ public class SearchUserActivity extends AppCompatActivity {
         adapter = new Search_User_Recycler_Adapter(options, getApplicationContext());
         recycler_view.setLayoutManager(new LinearLayoutManager(this));
         recycler_view.setAdapter(adapter);
-        adapter.startListening();
+        adapter.startListening();   //will listen to adapter to update changes in recyclerView
     }
 
     @Override

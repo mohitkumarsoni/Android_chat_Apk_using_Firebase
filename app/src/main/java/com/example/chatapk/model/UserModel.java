@@ -3,16 +3,17 @@ package com.example.chatapk.model;
 import com.google.firebase.Timestamp;
 
 public class UserModel {
-    private String phone, username;
+    private String phone, username, userId;
     private Timestamp createdTimeStamp;
 
     public UserModel() {
     }
 
-    public UserModel(String phone, String username, Timestamp createdTimeStamp) {
+    public UserModel(String phone, String username, Timestamp createdTimeStamp, String userId) {
         this.phone = phone;
         this.username = username;
         this.createdTimeStamp = createdTimeStamp;
+        this.userId = userId;
     }
 
     public String getPhone() {
@@ -37,5 +38,13 @@ public class UserModel {
 
     public void setCreatedTimeStamp(Timestamp createdTimeStamp) {
         this.createdTimeStamp = createdTimeStamp;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 }
