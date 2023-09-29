@@ -45,4 +45,8 @@ dependencies {
     implementation ("com.hbb20:ccp:2.5.0")
     implementation(platform("com.google.firebase:firebase-bom:32.3.1"))
     implementation("com.google.firebase:firebase-auth")
+
+    // for recyclerView data which will be fetched through firestore
+    // FirebaseUI for Cloud Firestore
+    implementation ("com.firebaseui:firebase-ui-firestore:8.0.2")
 }

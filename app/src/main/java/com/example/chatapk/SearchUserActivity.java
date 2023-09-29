@@ -1,6 +1,7 @@
 package com.example.chatapk;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
@@ -8,10 +9,19 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
+import com.example.chatapk.Adapter.Search_User_Recycler_Adapter;
+import com.example.chatapk.model.UserModel;
+import com.example.chatapk.util.FireBaseUtil;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.firebase.firestore.Query;
+
 public class SearchUserActivity extends AppCompatActivity {
     ImageButton back_btn,search_btn;
     RecyclerView recycler_view;
     EditText search_input;
+
+    Search_User_Recycler_Adapter adapter;
+
 
 
     @Override
@@ -47,5 +57,39 @@ public class SearchUserActivity extends AppCompatActivity {
 
     private void setupSearchRecyclerView(String searchTerm) {
 
+        Query query = FireBaseUtil.allUserCollectionReference()
+                .whereGreaterThanOrEqualTo("username", searchTerm);
+
+        FirestoreRecyclerOptions<UserModel> options = new FirestoreRecyclerOptions.Builder<UserModel>()
+                .setQuery(query, UserModel.class).build();
+
+        adapter = new Search_User_Recycler_Adapter(options, getApplicationContext());
+        recycler_view.setLayoutManager(new LinearLayoutManager(this));
+        recycler_view.setAdapter(adapter);
+        adapter.startListening();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (adapter != null){
+            adapter.startListening();
+        }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (adapter != null){
+            adapter.stopListening();
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (adapter != null){
+            adapter.startListening();
+        }
     }
 }
