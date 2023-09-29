@@ -1,6 +1,7 @@
 package com.example.chatapk.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,8 +11,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.chatapk.ChatActivity;
 import com.example.chatapk.R;
 import com.example.chatapk.model.UserModel;
+import com.example.chatapk.util.AndroidUtil;
 import com.example.chatapk.util.FireBaseUtil;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
@@ -37,7 +40,10 @@ public class Search_User_Recycler_Adapter extends FirestoreRecyclerAdapter<UserM
 
         holder.itemView.setOnClickListener(v -> {
             // navigate to chat activity
-
+            Intent intent = new Intent(context, ChatActivity.class);
+            AndroidUtil.passUserModelAsIntent(intent, model);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(intent);
         });
 
     }

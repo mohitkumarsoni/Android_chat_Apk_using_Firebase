@@ -18,4 +18,5 @@
     <string name="search_user">Search User</string>
     <string name="username1">Username</string>
     <string name="todo">TODO</string>
+    <string name="write_message">Write message</string>
 </resources>
