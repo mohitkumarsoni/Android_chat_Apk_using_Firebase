@@ -25,4 +25,21 @@ public class FireBaseUtil {
         return FirebaseFirestore.getInstance().collection("users");
     }
 
+
+
+    public static DocumentReference getChatRoomReference(String chatroomId){
+        return FirebaseFirestore.getInstance().collection("chatroooms").document(chatroomId);
+    }
+
+
+    // user1 & user2 should match their user id to chat
+    // this method will help user achieving it s they can chat
+    public static String getChatRoomId(String userId1, String userId2){
+        if (userId1.hashCode() < userId2.hashCode()){
+            return userId1+"_"+userId2;
+        }else {
+            return userId2+"_"+userId1;
+        }
+    }
+
 }
