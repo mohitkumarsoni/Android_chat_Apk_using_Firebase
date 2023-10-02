@@ -1,6 +1,5 @@
 package com.example.chatapk;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -13,10 +12,7 @@ import com.example.chatapk.model.ChatRoomModel;
 import com.example.chatapk.model.UserModel;
 import com.example.chatapk.util.AndroidUtil;
 import com.example.chatapk.util.FireBaseUtil;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
-import com.google.firebase.firestore.DocumentSnapshot;
 
 import java.util.Arrays;
 
