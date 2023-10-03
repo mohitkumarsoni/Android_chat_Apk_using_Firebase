@@ -1,5 +1,6 @@
 package com.example.chatapk;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -8,11 +9,15 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.example.chatapk.model.ChatMessageModel;
 import com.example.chatapk.model.ChatRoomModel;
 import com.example.chatapk.model.UserModel;
 import com.example.chatapk.util.AndroidUtil;
 import com.example.chatapk.util.FireBaseUtil;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
+import com.google.firebase.firestore.DocumentReference;
 
 import java.util.Arrays;
 
@@ -49,8 +54,33 @@ public class ChatActivity extends AppCompatActivity {
         
         otherUsername.setText(otherUser.getUsername());
         
+        sendMessageButton.setOnClickListener(v -> {
+            String message = messageInput.getText().toString().trim();
+            if (message.isEmpty()){
+                return;
+            }
+            sendMessageToUser(message);
+        });
+        
         getOrCreateChatRoomModel();
 
+    }
+
+    private void sendMessageToUser(String message) {
+        chatRoomModel.setLastMessageTimeStamp(Timestamp.now());
+        chatRoomModel.setLastMessageSenderId(FireBaseUtil.currentUserId());
+        FireBaseUtil.getChatRoomReference(chatRoomId).set(chatRoomModel);
+
+        ChatMessageModel chatMessageModel = new ChatMessageModel(message, FireBaseUtil.currentUserId(), Timestamp.now());
+        FireBaseUtil.getChatRoomMessageReference(chatRoomId).add(chatMessageModel)
+                .addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentReference> task) {
+                        if (task.isSuccessful()){
+                            messageInput.setText("");
+                        }
+                    }
+                });
     }
 
     private void getOrCreateChatRoomModel() {

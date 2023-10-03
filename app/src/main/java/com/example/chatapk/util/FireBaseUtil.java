@@ -31,6 +31,10 @@ public class FireBaseUtil {
         return FirebaseFirestore.getInstance().collection("chatroooms").document(chatroomId);
     }
 
+    public static CollectionReference getChatRoomMessageReference(String chatroomId){
+        return getChatRoomReference(chatroomId).collection("chats");
+    }
+
 
     // user1 & user2 should match their user id to chat
     // this method will help user achieving it s they can chat
