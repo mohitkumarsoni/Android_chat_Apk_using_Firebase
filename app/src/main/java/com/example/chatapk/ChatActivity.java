@@ -2,6 +2,7 @@ package com.example.chatapk;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
@@ -9,15 +10,18 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.example.chatapk.Adapter.ChatRecyclerAdapter;
 import com.example.chatapk.model.ChatMessageModel;
 import com.example.chatapk.model.ChatRoomModel;
 import com.example.chatapk.model.UserModel;
 import com.example.chatapk.util.AndroidUtil;
 import com.example.chatapk.util.FireBaseUtil;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.Query;
 
 import java.util.Arrays;
 
@@ -29,6 +33,8 @@ public class ChatActivity extends AppCompatActivity {
     ImageButton sendMessageButton, backBtn;
     TextView otherUsername;
     RecyclerView recyclerView;
+    ChatRecyclerAdapter adapter;
+
 
 
     @Override
@@ -61,9 +67,35 @@ public class ChatActivity extends AppCompatActivity {
             }
             sendMessageToUser(message);
         });
-        
+
+        // will get chatroom model or create new to begin chats
         getOrCreateChatRoomModel();
 
+        // setting up recyclerView to show chat conversations
+        setupChatRecyclerView();
+
+    }
+
+    private void setupChatRecyclerView() {
+        Query query = FireBaseUtil.getChatRoomMessageReference(chatRoomId)
+                .orderBy("timestamp", Query.Direction.DESCENDING);
+
+        FirestoreRecyclerOptions<ChatMessageModel> options = new FirestoreRecyclerOptions.Builder<ChatMessageModel>()
+                .setQuery(query,ChatMessageModel.class).build();
+
+        adapter = new ChatRecyclerAdapter(options, getApplicationContext());
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setReverseLayout(true);     // recyclerView will start in reverse order, like chat apps
+        recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.setAdapter(adapter);
+        adapter.startListening();
+        adapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+            @Override
+            public void onItemRangeInserted(int positionStart, int itemCount) {
+                super.onItemRangeInserted(positionStart, itemCount);
+                recyclerView.smoothScrollToPosition(0);
+            }
+        });
     }
 
     private void sendMessageToUser(String message) {

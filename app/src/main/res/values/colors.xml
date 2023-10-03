@@ -9,5 +9,9 @@
     <color name="cream">#FFF6E0</color>
 
 
+    <color name="chat_color_sender">#536DFE</color>
+    <color name="chat_color_receiver">#59FF61</color>
+
+
 
 </resources>
