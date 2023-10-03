@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -101,6 +102,7 @@ public class ChatActivity extends AppCompatActivity {
     private void sendMessageToUser(String message) {
         chatRoomModel.setLastMessageTimeStamp(Timestamp.now());
         chatRoomModel.setLastMessageSenderId(FireBaseUtil.currentUserId());
+        chatRoomModel.setLastMessage(message);
         FireBaseUtil.getChatRoomReference(chatRoomId).set(chatRoomModel);
 
         ChatMessageModel chatMessageModel = new ChatMessageModel(message, FireBaseUtil.currentUserId(), Timestamp.now());
@@ -133,5 +135,13 @@ public class ChatActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(ChatActivity.this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
     }
 }
