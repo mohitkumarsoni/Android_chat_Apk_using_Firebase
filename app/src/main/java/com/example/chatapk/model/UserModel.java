@@ -3,7 +3,7 @@ package com.example.chatapk.model;
 import com.google.firebase.Timestamp;
 
 public class UserModel {
-    private String phone, username, userId;
+    private String phone, username, userId, fcmToken;
     private Timestamp createdTimeStamp;
 
     public UserModel() {
@@ -46,5 +46,13 @@ public class UserModel {
 
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    public String getFcmToken() {
+        return fcmToken;
+    }
+
+    public void setFcmToken(String fcmToken) {
+        this.fcmToken = fcmToken;
     }
 }

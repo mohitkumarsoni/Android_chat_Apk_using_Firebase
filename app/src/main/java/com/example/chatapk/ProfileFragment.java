@@ -29,6 +29,7 @@ import com.example.chatapk.util.AndroidUtil;
 import com.example.chatapk.util.FireBaseUtil;
 import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.Objects;
 
@@ -85,10 +86,16 @@ public class ProfileFragment extends Fragment {
         });
 
         logoutBtn.setOnClickListener(v -> {
-            FireBaseUtil.logout();
-            Intent intent = new Intent(getContext(), SplashActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(intent);
+
+            FirebaseMessaging.getInstance().deleteToken().addOnCompleteListener(task -> {
+                if (task.isSuccessful()){
+                    FireBaseUtil.logout();
+                    Intent intent = new Intent(getContext(), SplashActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+                }
+            });
+
         });
 
         profilePic.setOnClickListener((v) -> {
@@ -151,7 +158,7 @@ public class ProfileFragment extends Fragment {
         setInProgress(true);
         FireBaseUtil.getCurrentProfilePicStorageReference().getDownloadUrl()
                         .addOnCompleteListener(task -> {
-                            if (task.isSuccessful()){
+                            if (task.isSuccessful()) {
                                 Uri uri = task.getResult();
                                 AndroidUtil.setProfilePic(getContext(), uri, profilePic);
                             }

@@ -5,12 +5,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 
+import com.example.chatapk.util.FireBaseUtil;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import org.checkerframework.checker.units.qual.C;
 
@@ -57,6 +60,16 @@ public class MainActivity extends AppCompatActivity {
         // fragment selected by default
         bottomNavigationView.setSelectedItemId(R.id.menu_chat);
 
+        GetFCMToken();
 
+    }
+
+    private void GetFCMToken() {
+        FirebaseMessaging.getInstance().getToken().addOnCompleteListener(task -> {
+            if (task.isSuccessful()){
+                String token = task.getResult();
+                FireBaseUtil.currentUserDetails().update("fcmToken",token);
+            }
+        });
     }
 }
