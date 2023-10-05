@@ -38,6 +38,7 @@ dependencies {
     implementation("com.google.android.material:material:1.9.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("com.google.firebase:firebase-firestore-ktx:24.8.1")
+    implementation("com.google.firebase:firebase-storage-ktx:20.2.1")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
@@ -49,4 +50,10 @@ dependencies {
     // for recyclerView data which will be fetched through firestore
     // FirebaseUI for Cloud Firestore
     implementation ("com.firebaseui:firebase-ui-firestore:8.0.2")
+
+    // image picker dependency by https://github.com/Dhaval2404/ImagePicker
+    implementation ("com.github.Dhaval2404:ImagePicker:2.1")
+
+    // glide library to set image into profile picture view
+    implementation ("com.github.bumptech.glide:glide:4.16.0")
 }

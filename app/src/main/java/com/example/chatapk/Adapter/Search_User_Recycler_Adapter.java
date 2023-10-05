@@ -2,6 +2,7 @@ package com.example.chatapk.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,6 +36,14 @@ public class Search_User_Recycler_Adapter extends FirestoreRecyclerAdapter<UserM
         if (model.getUserId().equals(FireBaseUtil.currentUserId())){
             holder.usernameText.setText(model.getUsername()+" (Me)");
         }
+
+        FireBaseUtil.getOtherProfilePicStorageReference(model.getUserId()).getDownloadUrl()
+                        .addOnCompleteListener(t -> {
+                            if (t.isSuccessful()){
+                                Uri uri = t.getResult();
+                                AndroidUtil.setProfilePic(context, uri, holder.profilePic);
+                            }
+                        });
 
         holder.itemView.setOnClickListener(v -> {
             // navigate to chat activity
