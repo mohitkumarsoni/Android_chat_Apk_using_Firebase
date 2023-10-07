@@ -57,4 +57,8 @@ dependencies {
 
     // glide library to set image into profile picture view
     implementation ("com.github.bumptech.glide:glide:4.16.0")
+
+    // okhttp library for message notification
+    implementation("com.squareup.okhttp3:okhttp:4.10.0")
+
 }
